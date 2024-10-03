@@ -1,0 +1,28 @@
+﻿@model Tabr.Identity.Models.RegisterViewModel
+<head>
+    <link href=@Url.Content("~/styles/style.css") rel="stylesheet" type="text/css"/>
+</head>
+<form acp-controller="Atuh" asp-action="Register" method="post">
+    <input type="hidden" asp-for="ReturnUrl"/>
+    <h1 class="header">Register</h1>
+    <div class="block">
+        <label>Login</label>
+        <input asp-for="Login" class="input"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+    <div class="block">
+        <label>Password</label>
+        <input asp-for="Password" class="input" />
+        <span asp-validation-for="Password"></span>
+    </div>
+    <div class="block">
+        <label>Confirm Password</label>
+        <input asp-for="ConfirmPassword" class="input" />
+        <span asp-validation-for="ConfirmPassword"></span>
+    </div>
+    <div class="block">
+        <button type="submit" class="button">Sign In</button>
+    </div>
+    <a asp-controller="Auth" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl"
+        class="switch-button">Login</a>
+</form>

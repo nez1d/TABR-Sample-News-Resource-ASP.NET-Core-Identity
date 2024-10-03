@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Tabr.Identity;
 using Tabr.Identity.Data;
 using Tabr.Identity.Entities.User;
@@ -7,6 +8,8 @@ using Tabr.Identity.Entities.User;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 var connectionString = builder.Configuration.GetValue<string>("DefaultConnection");
+
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<AuthDbContext>(options =>
 {
@@ -57,6 +60,17 @@ using(var scope = app.Services.CreateScope())
     }
 }
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "Styles")),
+    RequestPath = "/Styles"
+});
+
 app.UseRouting();
 app.UseIdentityServer();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapDefaultControllerRoute();
+});
 app.Run();

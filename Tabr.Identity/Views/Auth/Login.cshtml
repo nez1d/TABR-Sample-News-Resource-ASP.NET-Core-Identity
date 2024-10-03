@@ -1,0 +1,22 @@
+﻿@model Tabr.Identity.Models.LoginViewModel
+<head>
+    <link href=@Url.Content("~/styles/app.css") rel="stylesheet" type="text/css"/>
+</head>
+<form asp-controller="Auth" asp-action="Login" method="post">
+    <input type="hidden" asp-for="ReturnUrl" />
+    <h1 class="header">Login</h1>
+    <div>
+        <label>Login</label>
+        <input asp-for="Login" class="input"/>
+        <span asp-validation-for="Login"></span>
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" class="input"/>
+        <span asp-validation-for="Password"></span>
+    </div>
+    <button type="submit" class="button">Sign In</button>
+    <a asp-controller="Auth" asp-action="Register" asp-route-returnUrl="@Model.ReturnUrl"
+       class="switch-button">Register</a>
+</form>
